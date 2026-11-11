@@ -92,8 +92,19 @@ def isWallCollision(wormCoords):
         worm = [{'x': 32, 'y': 10}, ...]   ->  True   (past right wall)
         worm = [{'x': 10, 'y': 10}, ...]   ->  False  (safe)
     """
-    # TODO: implement this function
-    pass
+    # Get the worm's head position
+    head = wormCoords[HEAD]
+
+    # check if the head is outside the left or right side of the grid
+    if head['x'] < 0 or head['x'] >= CELLWIDTH:
+        return True
+    
+    # Check if the head is outside the top or bottom of the grid
+    if head['y'] < 0 or head['y'] >= CELLHEIGHT:
+        return True
+    
+    # The head is still inside the grid
+    return False
 
 
 # ─────────────────────────────────────────────────────────────────────────────
