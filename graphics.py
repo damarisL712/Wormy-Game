@@ -64,8 +64,15 @@ def drawWorm(DISPLAYSURF, wormCoords, direction=RIGHT):
 
         # Draw the outer and inner rectangles.
         pygame.draw.rect(DISPLAYSURF, DARKGREEN, outer_rect)
-        pygame.draw.rect(DISPLAYSURF, GREEN, inner_rect)
 
+    # Draw the dark-green border around every segment.
+    pygame.draw.rect(DISPLAYSURF, DARKGREEN, outer_rect)
+
+    # Make the head a different shade of green.
+    if index == HEAD:
+        pygame.draw.rect(DISPLAYSURF, HEADGREEN, inner_rect)
+    else:
+        pygame.draw.rect(DISPLAYSURF, GREEN, inner_rect)
 # ─────────────────────────────────────────────────────────────────────────────
 # TASK 9 — drawApple()                                                [15 pts]
 # ─────────────────────────────────────────────────────────────────────────────
