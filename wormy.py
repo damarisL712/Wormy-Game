@@ -243,6 +243,9 @@ def runGame():
     if isWallCollision(wormCoords):
         return
 
+# End the game round if the worm hits its own body.
+    if isSelfCollision(wormCoords):
+        return
 
 if __name__ == '__main__':
     main()
