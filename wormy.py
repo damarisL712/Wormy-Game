@@ -166,8 +166,16 @@ def runGame():
             pygame.display.update()
             FPSCLOCK.tick(FPS)
     """
-    # TODO: implement this function
-    pass
+    # Pick a random starting position at least 5 cells from each edge.
+    startx = random.randint(5, CELLWIDTH - 6)
+    starty = random.randint(5, CELLHEIGHT - 6)
+
+    # Create the starting worm with 3 segments.
+    wormCoords = [
+        {'x': startx, 'y': starty},
+        {'x': startx - 1, 'y': starty},
+        {'x': startx - 2, 'y': starty}
+    ]
 
 
 if __name__ == '__main__':
