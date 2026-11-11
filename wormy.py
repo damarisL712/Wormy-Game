@@ -221,6 +221,16 @@ def runGame():
             elif event.key == K_RIGHT or event.key == K_d:
                 if not isOppositeDirection(direction, RIGHT):
                     direction = RIGHT
+            
+            # Move up only if it is not the opposite of the current direction
+            elif event.key == K_UP or event.key == K_w:
+                if not isOppositeDirection(direction, UP):
+                    direction = UP
+            
+            # Move down only if it is not the opposite of the current direction
+            elif event.key == K_DOWN or event.key == K_s:
+                if not isOppositeDirection(direction, DOWN):
+                    direction = DOWN
 
 
 if __name__ == '__main__':
