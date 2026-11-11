@@ -1,200 +1,132 @@
-## Objective
-In this project you will complete a fully playable Wormy snake game using Python and the Pygame library. A working skeleton (wormy.py) has already been provided with constants, helper functions, and screen management code. Your job is to implement the 9 core functions that make the game run.
+# Wormy Snake Game
 
-### This project reinforces:
+A fully playable Snake-style game built with **Python** and **Pygame**. This project focuses on separating game logic from graphics and screen management to create code that is easier to test, maintain, and extend.
 
-- Function design and decomposition
+## Project Overview
 
-- Boolean logic and conditional reasoning
+The Wormy Snake Game allows the player to control a growing worm as it moves around a grid collecting apples. Each apple increases the worm's length and score. The game ends if the worm collides with a wall or with its own body.
 
-- List manipulation (insert, delete, index)
+The project was completed from starter code by implementing the core game logic, main game loop, collision detection, scoring system, movement controls, and Pygame graphics.
 
-- Coordinate-based 2D thinking
+## Skills Demonstrated
 
-- Basic Pygame graphics with pygame.draw
-
-- Writing code that can be automatically tested
-
-### Learning Objectives
-By completing this project, you will be able to:
-
-- Implement game logic as small, independently testable pure functions
-
-- Manipulate a list of dictionaries to simulate movement and growth
-
-- Apply boundary and collision detection using coordinate comparisons
-
-- Use pygame.draw primitives (rect, circle, ellipse) to render graphics
-
-- Understand why separating logic from rendering makes code easier to test
+- Python function design and decomposition
+- Boolean logic and conditional statements
+- List and dictionary manipulation
+- Coordinate-based movement
+- Collision detection
+- Object movement on a 2D grid
+- Event handling with Pygame
+- Rendering graphics with `pygame.draw`
+- Separation of game logic and presentation
+- Unit testing with `pytest`
+- Writing code designed for automated testing
 
 ## Project Structure
+
+```text
 ASG06-starter-code/
-├── wormy.py          ← main entry point (imports everything)
-├── constants.py      ← all constants and colors
-├── logic.py          ← pure game logic (tested by pytest)
-├── graphics.py       ← all drawing/rendering functions
-├── screens.py        ← start screen, game over screen, helpers
-└── test_wormy.py     ← instructor pytest suite (48 tests)
+├── wormy.py          # Main entry point and game loop
+├── constants.py      # Game constants and colors
+├── logic.py          # Movement, collision, scoring, and direction logic
+├── graphics.py       # Worm, apple, grid, and score rendering
+├── screens.py        # Start and game-over screens
+└── test_wormy.py     # Instructor-provided pytest test suite
+```
 
-Do not rename any function, change any function signature, or modify constants.py, screens.py, or test_wormy.py. The autograder depends on exact names and signatures.
+## Core Features
 
- 
+The game includes:
 
-## Implementation
-All 9 tasks are marked with # TODO comments in the starter files. Here is a summary:
+- WASD and arrow-key movement
+- Direction-reversal prevention
+- Randomized starting positions
+- Random apple placement
+- Worm growth after eating apples
+- Score tracking
+- Wall collision detection
+- Self-collision detection
+- Game-over behavior
+- Grid-based movement
+- Pygame-based rendering
 
-logic.py — 7 Functions (70 points)
-These are pure functions — they take arguments and return a value. They do not use Pygame and can be fully unit-tested.
+## Game Logic
 
-Task 1 — getNewHead(wormCoords, direction) — 10 pts
-Calculate the grid cell the worm's head will move into next frame.
+The game logic is separated into independently testable functions within `logic.py`.
 
-direction is one of UP, DOWN, LEFT, RIGHT
+These functions handle:
 
-Important: In Pygame, y = 0 is the top of the screen. Moving UP means y - 1; moving DOWN means y + 1
+- Calculating the worm's next head position
+- Detecting wall collisions
+- Detecting self-collisions
+- Detecting when an apple is eaten
+- Calculating the player's score
+- Preventing opposite-direction movement
 
-Return a new {'x': int, 'y': int} dict
+Keeping this logic separate from Pygame rendering allows the core behavior of the game to be tested without requiring the graphical interface.
 
-Do not modify wormCoords
+## Technologies Used
 
-text
-Example: worm = [{'x': 5, 'y': 5}, {'x': 4, 'y': 5}] getNewHead(worm, RIGHT) → {'x': 6, 'y': 5} getNewHead(worm, UP) → {'x': 5, 'y': 4}
-Task 2 — isWallCollision(wormCoords) — 10 pts
-Return True if the worm's head has gone outside the grid.
+- **Python**
+- **Pygame**
+- **Pytest**
+- **Git / GitHub**
 
-Valid column range: 0 to CELLWIDTH - 1
+## Installation
 
-Valid row range: 0 to CELLHEIGHT - 1
+Install the required dependencies:
 
-Only check the head (index 0) — body segments are always inside
+```bash
+pip install -r requirements.txt
+```
 
-Return False if the head is still within bounds
+## Running the Game
 
-text
-Example: worm = [{'x': -1, 'y': 10}, ...] → True (hit left wall) worm = [{'x': 32, 'y': 10}, ...] → True (hit right wall, CELLWIDTH=32) worm = [{'x': 10, 'y': 10}, ...] → False (safe)
-Task 3 — isSelfCollision(wormCoords) — 10 pts
-Return True if the worm's head overlaps any of its own body segments.
+Start the game with:
 
-Compare head (index 0) against all segments from index 1 onward
+```bash
+python wormy.py
+```
 
-A one-segment worm can never collide with itself
+### Controls
 
-Return False if no overlap is found
+- **W / Up Arrow** — Move up
+- **S / Down Arrow** — Move down
+- **A / Left Arrow** — Move left
+- **D / Right Arrow** — Move right
+- **ESC** — Exit the game
 
-text
-Example: worm = [{'x':5,'y':5}, {'x':6,'y':5}, {'x':6,'y':6}, {'x':5,'y':6}, {'x':5,'y':5}] → True (head == tail)
-Task 4 — hasEatenApple(wormCoords, apple) — 10 pts
-Return True if the worm's head is on the same cell as the apple.
+## Running Tests
 
-The apple is a {'x': int, 'y': int} dict
+Run the instructor-provided automated test suite with:
 
-Only the head triggers eating — being on a body segment does not count
+```bash
+pytest test_wormy.py -v
+```
 
-text
-Example: worm = [{'x': 10, 'y': 10}, ...] apple = {'x': 10, 'y': 10} → True apple = {'x': 11, 'y': 10} → False
-Task 5 — getScore(wormCoords) — 10 pts
-Return the number of apples eaten so far.
+The test suite contains **48 automated tests** covering the game's logic and integration behavior.
 
-The worm starts with 3 segments; every apple eaten adds 1
+## Development Approach
 
-Score = len(wormCoords) - 3
+This project was developed incrementally, with each core function implemented and tested independently before being integrated into the full game.
 
-Use max(0, ...) to ensure the score never goes negative
+Separating the project into logic, graphics, screen management, and the main game loop made it easier to debug individual components and helped reinforce the importance of modular software design.
 
-text
-Example: len(wormCoords) == 3 → score = 0 (no apples eaten yet) len(wormCoords) == 7 → score = 4 (4 apples eaten)
-Task 6 — isOppositeDirection(current, new) — 10 pts
-Return True if new is the exact reverse of current.
-This prevents the player from steering the worm directly into its own body.
+## Future Improvements
 
-Opposite pairs: UP ↔ DOWN, LEFT ↔ RIGHT
+Possible future enhancements include:
 
-Moving in the same direction is not opposite — return False
+- Improved worm animations
+- Additional visual effects
+- Multiple difficulty levels
+- High-score persistence
+- Sound effects and background music
+- Pause functionality
+- Custom game settings
 
-text
-Example: isOppositeDirection(RIGHT, LEFT) → True isOppositeDirection(UP, DOWN) → True isOppositeDirection(RIGHT, UP) → False isOppositeDirection(RIGHT, RIGHT) → False
-Task 7 — runGame() in wormy.py — 10 pts
-Wire all the logic functions together into the main game loop.
+## Author
 
-Your implementation must:
+**Damaris Lubin**
 
-Pick a random starting position at least 5 cells from every edge
-
-Create wormCoords as a list of 3 {'x', 'y'} dicts (head at index 0)
-
-Set initial direction = RIGHT and place the first apple
-
-Each frame:
-
-Handle QUIT, KEYDOWN (WASD / arrow keys), and ESC events
-
-Block direction reversals using isOppositeDirection()
-
-Compute and prepend the new head with getNewHead()
-
-Call isWallCollision() → return if True
-
-Call isSelfCollision() → return if True
-
-Call hasEatenApple() → if True, place a new apple and keep tail; else remove tail
-
-Render: drawGrid, drawWorm, drawApple, drawScore, pygame.display.update, FPSCLOCK.tick
-
-graphics.py — 2 Functions (30 points)
-Task 8 — drawWorm(DISPLAYSURF, wormCoords, direction) — 15 pts
-Render the worm on screen.
-
-Minimum requirement (full credit):
-
-Each segment is a filled green rectangle with a dark-green border
-
-Bonus (up to 5 extra credit points):
-
-Rounded corners using border_radius
-
-Head visually distinct from body (brighter color)
-
-Eyes on the head with pupils that face the direction of movement
-
-Task 9 — drawApple(DISPLAYSURF, coord) — 15 pts
-Render the apple on screen.
-
-Minimum requirement (full credit):
-
-A filled red rectangle covering the cell
-
-Bonus (up to 5 extra credit points):
-
-Circular apple shape using pygame.draw.circle
-
-Leaf detail at the top
-
-Shine/highlight dot for a 3-D effect
-
-##  Grading Rubric
-**Logic Functions — 70 pts**
-Task	Function	Points	How It Is Graded
-1	getNewHead()	10	7 automated test cases
-2	isWallCollision()	10	9 automated test cases
-3	isSelfCollision()	10	7 automated test cases
-4	hasEatenApple()	10	6 automated test cases
-5	getScore()	10	4 automated test cases
-6	isOppositeDirection()	10	10 automated test cases
-7	runGame()	10	5 integration test cases
-Each task is all-or-nothing per test case: a test either passes or fails. Partial points are awarded proportionally within each task (e.g. 5/7 test cases passing = ~7/10 pts).
-
-**Graphics — 30 pts**
-Task	Function	Points	How It Is Graded
-8	drawWorm()	15	Instructor visual inspection
-9	drawApple()	15	Instructor visual inspection
-
-## Running Your Code
-Install libraries and dependencies 
-`pip install < requirements.txt`
-
-Play the game
-`python wormy.py`
-
-Run the test suite
-`pytest test_wormy.py -v`
+Cybersecurity Analytics and Operations Student  
+Penn State University
