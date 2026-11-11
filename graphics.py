@@ -50,29 +50,55 @@ def drawWorm(DISPLAYSURF, wormCoords, direction=RIGHT):
         wormCoords (list): Current worm segments; index 0 is the head.
         direction  (str):  Current movement direction (for eye orientation).
     """
-    # Go through each segment of the worm
-    for coord in wormCoords:
-        # Convert the grid position into pixel coordinates
+    # Go through each segment of the worm.
+    for index, coord in enumerate(wormCoords):
+        # Convert the grid position into pixel coordinates.
         px = coord['x'] * CELLSIZE
         py = coord['y'] * CELLSIZE
 
         # Create the outer dark-green rectangle.
         outer_rect = pygame.Rect(px + 1, py + 1, CELLSIZE - 2, CELLSIZE - 2)
 
-        # Create the inner green rectangle.
+        # Create the inner rectangle.
         inner_rect = pygame.Rect(px + 4, py + 4, CELLSIZE - 8, CELLSIZE - 8)
 
-        # Draw the outer and inner rectangles.
-        pygame.draw.rect(DISPLAYSURF, DARKGREEN, outer_rect)
+        # Draw the dark-green border around every segment.
+        pygame.draw.rect(DISPLAYSURF, DARKGREEN, outer_rect, border_radius=6)
 
-    # Draw the dark-green border around every segment.
-    pygame.draw.rect(DISPLAYSURF, DARKGREEN, outer_rect)
+        # Make the head a different color from the body.
+        if index == HEAD:
+            pygame.draw.rect(DISPLAYSURF, HEADGREEN, inner_rect, border_radius=4)
 
-    # Make the head a different shade of green.
-    if index == HEAD:
-        pygame.draw.rect(DISPLAYSURF, HEADGREEN, inner_rect)
-    else:
-        pygame.draw.rect(DISPLAYSURF, GREEN, inner_rect)
+            # Draw the eyes.
+            pygame.draw.circle(DISPLAYSURF, WHITE, (px + 6, py + 6), 3)
+            pygame.draw.circle(DISPLAYSURF, WHITE, (px + 14, py + 6), 3)
+
+            # Set pupil positions based on the direction the worm is moving.
+            left_pupil_x = px + 6
+            left_pupil_y = py + 6
+            right_pupil_x = px + 14
+            right_pupil_y = py + 6
+
+            if direction == LEFT:
+                left_pupil_x -= 1
+                right_pupil_x -= 1
+            elif direction == RIGHT:
+                left_pupil_x += 1
+                right_pupil_x += 1
+            elif direction == UP:
+                left_pupil_y -= 1
+                right_pupil_y -= 1
+            elif direction == DOWN:
+                left_pupil_y += 1
+                right_pupil_y += 1
+
+            # Draw the pupils.
+            pygame.draw.circle(DISPLAYSURF, BLACK, (left_pupil_x, left_pupil_y), 1)
+            pygame.draw.circle(DISPLAYSURF, BLACK, (right_pupil_x, right_pupil_y), 1)
+
+        else:
+            # Draw normal body segments.
+            pygame.draw.rect(DISPLAYSURF, GREEN, inner_rect, border_radius=4)
 # ─────────────────────────────────────────────────────────────────────────────
 # TASK 9 — drawApple()                                                [15 pts]
 # ─────────────────────────────────────────────────────────────────────────────
