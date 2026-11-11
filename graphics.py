@@ -124,8 +124,23 @@ def drawApple(DISPLAYSURF, coord):
         DISPLAYSURF  : Active pygame display surface.
         coord (dict): {'x': int, 'y': int} grid position of the apple.
     """
-    # TODO: implement this function
-    pass
+  # Convert the apple's grid position into pixel coordinates.
+    px = coord['x'] * CELLSIZE
+    py = coord['y'] * CELLSIZE
+
+    # Find the center of the grid cell.
+    center_x = px + CELLSIZE // 2
+    center_y = py + CELLSIZE // 2
+
+    # Draw the red apple body.
+    pygame.draw.circle(DISPLAYSURF, RED, (center_x, center_y), CELLSIZE // 2 - 2)
+
+    # Draw a small green leaf at the top of the apple.
+    leaf_rect = pygame.Rect(center_x, py + 1, 5, 5)
+    pygame.draw.rect(DISPLAYSURF, LEAF_GREEN, leaf_rect)
+
+    # Draw a small shine spot on the apple.
+    pygame.draw.circle(DISPLAYSURF, APPLE_SHINE, (center_x - 4, center_y - 4), 2)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
