@@ -128,11 +128,20 @@ def isSelfCollision(wormCoords):
                 {'x':5,'y':6}, {'x':5,'y':5}]
         isSelfCollision(worm)  ->  True   (head matches last segment)
     """
-    # a worm with only one segment cannot collide with itself
+    # A worm with only one segment cannot collide with itself.
     if len(wormCoords) <= 1:
-        return False 
-    return False
+        return False
 
+    # Get the worm's head.
+    head = wormCoords[HEAD]
+
+    # Check every body segment after the head.
+    for segment in wormCoords[1:]:
+        if head == segment:
+            return True
+
+    # The head does not overlap any body segment.
+    return False
 
 # ─────────────────────────────────────────────────────────────────────────────
 # TASK 4 — hasEatenApple()                                            [10 pts]
