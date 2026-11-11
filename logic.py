@@ -164,8 +164,14 @@ def hasEatenApple(wormCoords, apple):
         apple = {'x': 10, 'y': 10}   ->  True
         apple = {'x': 11, 'y': 10}   ->  False
     """
-    # TODO: implement this function
-    pass
+    # Get the worm's head
+    head = wormCoords[HEAD]
+
+    # Check if the head and apple are on the same cell
+    if head == apple:
+        return True
+    return False
+
 
 
 # ─────────────────────────────────────────────────────────────────────────────
