@@ -183,6 +183,14 @@ def runGame():
     # Place the first apple at a random location
     apple = getRandomLocation()
 
+    # Close the game if the player clicks the window's close button
+    if event.type == QUIT:
+        terminate()
+
+    # Check for keyboard input
+    elif event.type == KEYDOWN:
+        if event.key == K_ESCAPE:
+            terminate()
 
 if __name__ == '__main__':
     main()
