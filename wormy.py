@@ -239,6 +239,27 @@ def runGame():
         else:
             # Remove the last segment so the worm stays the same length.
             del wormCoords[-1]
-            
+        
+        # Clear the screen with the background color.
+        DISPLAYSURF.fill(BGCOLOR)
+
+        # Draw the game grid.
+        drawGrid(DISPLAYSURF)
+
+        # Draw the worm.
+        drawWorm(DISPLAYSURF, wormCoords, direction)
+
+        # Draw the apple.
+        drawApple(DISPLAYSURF, apple)
+
+        # Draw the current score.
+        drawScore(DISPLAYSURF, BASICFONT, getScore(wormCoords))
+
+        # Update the display.
+        pygame.display.update()
+
+        # Control the game speed.
+        FPSCLOCK.tick(FPS)
+
 if __name__ == '__main__':
     main()
