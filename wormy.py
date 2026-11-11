@@ -183,54 +183,61 @@ def runGame():
     # Place the first apple at a random location
     apple = getRandomLocation()
 
-    # Check for player input and game events
-    for event in pygame.event.get():
-        # Close the game if the player clicks the window's close button
-        if event.type == QUIT:
-            terminate()
-
-        # Check for keyboard input
-        elif event.type == KEYDOWN:
-
-            # Exit the game if the Escape key is pressed
-            if event.key == K_ESCAPE:
+    while True:   
+        # Check for player input and game events
+        for event in pygame.event.get():
+            # Close the game if the player clicks the window's close button
+            if event.type == QUIT:
                 terminate()
-            
-            # Move left with the left arrow key or A key.
-            elif event.key == K_LEFT or event.key == K_a:
-                direction = LEFT
 
-            # Move right with the right arrow key or D key.
-            elif event.key == K_RIGHT or event.key == K_d:
-                direction = RIGHT
-            
-            # Move up with the up arrow key or W key.
-            elif event.key == K_UP or event.key == K_w:
-                direction = UP
+            # Check for keyboard input
+            elif event.type == KEYDOWN:
 
-            # Move down with the down arrow key or S key.
-            elif event.key == K_DOWN or event.key == K_s:
-                direction = DOWN
-            
-            # Move left only if it is not the opposite of the current direction
-            elif event.key == K_LEFT or event.key == K_a:
-                if not isOppositeDirection(direction, LEFT):
+                # Exit the game if the Escape key is pressed
+                if event.key == K_ESCAPE:
+                    terminate()
+                
+                # Move left with the left arrow key or A key.
+                elif event.key == K_LEFT or event.key == K_a:
                     direction = LEFT
-            
-            # Move right only if it is not the opposite of the current direction.
-            elif event.key == K_RIGHT or event.key == K_d:
-                if not isOppositeDirection(direction, RIGHT):
+
+                # Move right with the right arrow key or D key.
+                elif event.key == K_RIGHT or event.key == K_d:
                     direction = RIGHT
-            
-            # Move up only if it is not the opposite of the current direction
-            elif event.key == K_UP or event.key == K_w:
-                if not isOppositeDirection(direction, UP):
+                
+                # Move up with the up arrow key or W key.
+                elif event.key == K_UP or event.key == K_w:
                     direction = UP
-            
-            # Move down only if it is not the opposite of the current direction
-            elif event.key == K_DOWN or event.key == K_s:
-                if not isOppositeDirection(direction, DOWN):
+
+                # Move down with the down arrow key or S key.
+                elif event.key == K_DOWN or event.key == K_s:
                     direction = DOWN
+                
+                # Move left only if it is not the opposite of the current direction
+                elif event.key == K_LEFT or event.key == K_a:
+                    if not isOppositeDirection(direction, LEFT):
+                        direction = LEFT
+                
+                # Move right only if it is not the opposite of the current direction.
+                elif event.key == K_RIGHT or event.key == K_d:
+                    if not isOppositeDirection(direction, RIGHT):
+                        direction = RIGHT
+                
+                # Move up only if it is not the opposite of the current direction
+                elif event.key == K_UP or event.key == K_w:
+                    if not isOppositeDirection(direction, UP):
+                        direction = UP
+                
+                # Move down only if it is not the opposite of the current direction
+                elif event.key == K_DOWN or event.key == K_s:
+                    if not isOppositeDirection(direction, DOWN):
+                        direction = DOWN
+
+    # calculate the worm's next head position
+    new_head = getNewHead(wormCoords, direction)
+
+    # Add the new head to the front of the worm.
+    wormCoords.insert(0, new_head)
 
 
 if __name__ == '__main__':
