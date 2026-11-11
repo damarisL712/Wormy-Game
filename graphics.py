@@ -50,9 +50,21 @@ def drawWorm(DISPLAYSURF, wormCoords, direction=RIGHT):
         wormCoords (list): Current worm segments; index 0 is the head.
         direction  (str):  Current movement direction (for eye orientation).
     """
-    # TODO: implement this function
-    pass
+    # Go through each segment of the worm
+    for coord in wormCoords:
+        # Convert the grid position into pixel coordinates
+        px = coord['x'] * CELLSIZE
+        py = coord['y'] * CELLSIZE
 
+        # Create the outer dark-green rectangle.
+        outer_rect = pygame.Rect(px + 1, py + 1, CELLSIZE - 2, CELLSIZE - 2)
+
+        # Create the inner green rectangle.
+        inner_rect = pygame.Rect(px + 4, py + 4, CELLSIZE - 8, CELLSIZE - 8)
+
+        # Draw the outer and inner rectangles.
+        pygame.draw.rect(DISPLAYSURF, DARKGREEN, outer_rect)
+        pygame.draw.rect(DISPLAYSURF, GREEN, inner_rect)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # TASK 9 — drawApple()                                                [15 pts]
