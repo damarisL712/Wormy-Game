@@ -239,6 +239,10 @@ def runGame():
     # Add the new head to the front of the worm.
     wormCoords.insert(0, new_head)
 
+    # End the game round if the worm hits a wall
+    if isWallCollision(wormCoords):
+        return
+
 
 if __name__ == '__main__':
     main()
