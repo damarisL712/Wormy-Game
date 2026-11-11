@@ -50,8 +50,22 @@ def getNewHead(wormCoords, direction):
         - Do NOT modify wormCoords.
         - Return a brand-new dict; do not reuse the existing head dict.
     """
-    # TODO: implement this function
-    pass
+    # Get the current x and y position of the worm's head.
+    x = wormCoords[HEAD]['x']
+    y = wormCoords[HEAD]['y']
+
+    # Change the position based on the direction the worm is moving.
+    if direction == RIGHT:
+        x += 1
+    elif direction == LEFT:
+        x -= 1
+    elif direction == UP:
+        y -= 1
+    elif direction == DOWN:
+        y += 1
+
+    # Return the new head position.
+    return {'x': x, 'y': y}
 
 
 # ─────────────────────────────────────────────────────────────────────────────
