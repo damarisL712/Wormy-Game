@@ -203,6 +203,14 @@ def runGame():
             # Move right with the right arrow key or D key.
             elif event.key == K_RIGHT or event.key == K_d:
                 direction = RIGHT
+            
+            # Move up with the up arrow key or W key.
+            elif event.key == K_UP or event.key == K_w:
+                direction = UP
+
+            # Move down with the down arrow key or S key.
+            elif event.key == K_DOWN or event.key == K_s:
+                direction = DOWN
 
 
 if __name__ == '__main__':
