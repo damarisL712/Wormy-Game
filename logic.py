@@ -128,8 +128,10 @@ def isSelfCollision(wormCoords):
                 {'x':5,'y':6}, {'x':5,'y':5}]
         isSelfCollision(worm)  ->  True   (head matches last segment)
     """
-    # TODO: implement this function
-    pass
+    # a worm with only one segment cannot collide with itself
+    if len(wormCoords) <= 1:
+        return False 
+    return False
 
 
 # ─────────────────────────────────────────────────────────────────────────────
