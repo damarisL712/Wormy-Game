@@ -183,14 +183,27 @@ def runGame():
     # Place the first apple at a random location
     apple = getRandomLocation()
 
-    # Close the game if the player clicks the window's close button
-    if event.type == QUIT:
-        terminate()
-
-    # Check for keyboard input
-    elif event.type == KEYDOWN:
-        if event.key == K_ESCAPE:
+    # Check for player input and game events
+    for event in pygame.event.get():
+        # Close the game if the player clicks the window's close button
+        if event.type == QUIT:
             terminate()
+
+        # Check for keyboard input
+        elif event.type == KEYDOWN:
+
+            # Exit the game if the Escape key is pressed
+            if event.key == K_ESCAPE:
+                terminate()
+            
+            # Move left with the left arrow key or A key.
+            elif event.key == K_LEFT or event.key == K_a:
+                direction = LEFT
+
+            # Move right with the right arrow key or D key.
+            elif event.key == K_RIGHT or event.key == K_d:
+                direction = RIGHT
+
 
 if __name__ == '__main__':
     main()
