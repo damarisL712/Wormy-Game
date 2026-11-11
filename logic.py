@@ -229,8 +229,12 @@ def isOppositeDirection(current, new):
         isOppositeDirection(RIGHT, UP)     ->  False
         isOppositeDirection(RIGHT, RIGHT)  ->  False   (same is NOT opposite)
     """
-    # TODO: implement this function
-    pass
+    # Check if the new direction is the oppsite vertical direction
+    if current == UP and new == DOWN:
+        return True
+    if current == DOWN and new == UP:
+        return True
+    return False
 
 
 # ─────────────────────────────────────────────────────────────────────────────
