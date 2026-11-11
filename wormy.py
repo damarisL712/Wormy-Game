@@ -177,6 +177,12 @@ def runGame():
         {'x': startx - 2, 'y': starty}
     ]
 
+    # Set the worm's starting direction
+    direction = RIGHT
+
+    # Place the first apple at a random location
+    apple = getRandomLocation()
+
 
 if __name__ == '__main__':
     main()
