@@ -229,13 +229,22 @@ def isOppositeDirection(current, new):
         isOppositeDirection(RIGHT, UP)     ->  False
         isOppositeDirection(RIGHT, RIGHT)  ->  False   (same is NOT opposite)
     """
-    # Check if the new direction is the oppsite vertical direction
+    # Check if the new direction is the opposite vertical direction.
     if current == UP and new == DOWN:
         return True
+
     if current == DOWN and new == UP:
         return True
-    return False
 
+    # Check if the new direction is the opposite horizontal direction.
+    if current == LEFT and new == RIGHT:
+        return True
+
+    if current == RIGHT and new == LEFT:
+        return True
+
+    # The directions are not opposites.
+    return False
 
 # ─────────────────────────────────────────────────────────────────────────────
 # PROVIDED — getRandomLocation()    Do NOT modify.
