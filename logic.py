@@ -197,8 +197,11 @@ def getScore(wormCoords):
         len(wormCoords) == 3  ->  0   (no apples eaten yet)
         len(wormCoords) == 7  ->  4   (4 apples eaten)
     """
-    # TODO: implement this function
-    pass
+    # Calculate the score based on how much the worm has grown
+    score = len(wormCoords) - 3
+    
+    # make sure the score never goes below zero
+    return max(0, score)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
