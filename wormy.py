@@ -211,6 +211,16 @@ def runGame():
             # Move down with the down arrow key or S key.
             elif event.key == K_DOWN or event.key == K_s:
                 direction = DOWN
+            
+            # Move left only if it is not the opposite of the current direction
+            elif event.key == K_LEFT or event.key == K_a:
+                if not isOppositeDirection(direction, LEFT):
+                    direction = LEFT
+            
+            # Move right only if it is not the opposite of the current direction.
+            elif event.key == K_RIGHT or event.key == K_d:
+                if not isOppositeDirection(direction, RIGHT):
+                    direction = RIGHT
 
 
 if __name__ == '__main__':
